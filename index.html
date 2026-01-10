@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonardo Fimbres | Footwear Design & Strategy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --accent: #990000;
+            --gray: #f5f5f7;
+            --subtle: #86868b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.4;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 5%; }
+
+        /* --- NAVIGATION --- */
+        header {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; text-transform: uppercase; }
+        nav a { margin-left: 30px; font-size: 0.9rem; font-weight: 600; color: var(--subtle); transition: 0.3s; text-decoration: none; }
+        nav a:hover { color: var(--text); }
+
+        /* --- HERO --- */
+        .hero { padding: 120px 0 100px 0; }
+        .hero h1 { 
+            font-size: clamp(3rem, 8vw, 6rem); 
+            font-weight: 800; 
+            letter-spacing: -0.04em; 
+            line-height: 0.9;
+            margin-bottom: 40px;
+        }
+        .hero p { 
+            font-size: 1.5rem; 
+            max-width: 700px; 
+            color: var(--subtle);
+            font-weight: 400;
+        }
+
+        /* --- WORK GRID --- */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px 40px;
+            padding-bottom: 100px;
+        }
+
+        .project-card { text-decoration: none; color: inherit; display: block; }
+
+        .image-container {
+            background-color: var(--gray);
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            margin-bottom: 20px;
+            border-radius: 4px; /* Un toque sutil tipo Apple */
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover img { transform: scale(1.05); }
+
+        .meta { display: flex; justify-content: space-between; align-items: baseline; }
+        .meta h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+        .meta span { color: var(--subtle); font-size: 0.9rem; }
+        .category { color: var(--accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; margin-top: 5px; display: block; }
+
+        /* --- FOOTER --- */
+        footer { padding: 100px 0 50px 0; border-top: 1px solid var(--gray); }
+        .footer-cta { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 40px; }
+        .footer-cta a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .work-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">Leonardo Fimbres</div>
+            <nav>
+                <a href="#work">Work</a>
+                <a href="#about">Profile</a>
+                <a href="mailto:tu-correo@ejemplo.com">Contact</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Footwear <br> <span style="color: var(--accent);">Strategy.</span></h1>
+            <p>Diseñador de moda enfocado en calzado técnico y estrategia de mercado. Uniendo la visión estética con la viabilidad comercial.</p>
+        </section>
+
+        <main id="work" class="work-grid">
+            <a href="#" class="project-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1000" alt="Zapato">
+                </div>
+                <div class="meta">
+                    <h2>Urban Velocity</h2>
+                    <span>2024</span>
+                </div>
+                <span class="category">Product Design / Marketing</span>
+            </a>
+
+            <a href="#" class="project-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=1000" alt="Zapato">
+                </div>
+                <div class="meta">
+                    <h2>Hybrid Soul</h2>
+                    <span>2023</span>
+                </div>
+                <span class="category">Sketching / Brand Identity</span>
+            </a>
+        </main>
+
+        <footer>
+            <div class="footer-cta">
+                ¿Tienes un proyecto? <br>
+                <a href="mailto:tu-correo@ejemplo.com" style="text-decoration: underline;">Hablemos.</a>
+            </div>
+            <div style="display: flex; gap: 20px; color: var(--subtle); font-size: 0.9rem;">
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+                <span>© 2026 Leonardo Fimbres</span>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
