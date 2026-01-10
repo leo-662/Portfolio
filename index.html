@@ -1,657 +1,329 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Leonardo López Fimbres | Diseño & Estrategia</title>
-
     <style>
-
         /* --- ESTILOS BASE & VARIABLES --- */
-
         :root {
-
             --bg-color: #ffffff;
-
             --text-main: #111111;
-
             --text-secondary: #555555;
-
             /* Rojo Oscuro tipo Google Docs */
-
             --brand-color: #990000; 
-
             --spacing-unit: 2rem;
-
         }
-
-
 
         /* Selección de texto elegante */
-
         ::selection {
-
             background: var(--brand-color);
-
             color: #fff;
-
         }
-
-
 
         * {
-
             margin: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
         }
-
-
 
         body {
-
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Helvetica es el estándar en moda */
-
             background-color: var(--bg-color);
-
             color: var(--text-main);
-
             line-height: 1.5;
-
             -webkit-font-smoothing: antialiased;
-
         }
-
-
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
-
         ul { list-style: none; }
 
-
-
         /* --- LAYOUT --- */
-
         .container {
-
             max-width: 1400px;
-
             margin: 0 auto;
-
             padding: 0 var(--spacing-unit);
-
         }
-
-
 
         /* --- HEADER --- */
-
         header {
-
             padding: 2.5rem 0;
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
         }
-
-
 
         .logo {
-
             font-weight: 700;
-
             font-size: 1.1rem;
-
             letter-spacing: -0.02em;
-
             text-transform: uppercase;
-
             color: var(--text-main);
-
         }
-
-
 
         /* Efecto hover en el logo */
-
         .logo:hover {
-
             color: var(--brand-color);
-
         }
-
-
 
         .nav-links {
-
             display: flex;
-
             gap: 2.5rem;
-
         }
-
-
 
         .nav-links a {
-
             font-size: 0.9rem;
-
             color: var(--text-secondary);
-
             font-weight: 500;
-
             position: relative;
-
         }
-
-
 
         /* Línea roja animada al pasar el mouse por el menú */
-
         .nav-links a::after {
-
             content: '';
-
             position: absolute;
-
             width: 0;
-
             height: 2px;
-
             bottom: -5px;
-
             left: 0;
-
             background-color: var(--brand-color);
-
             transition: width 0.3s ease;
-
         }
-
-
 
         .nav-links a:hover { color: var(--text-main); }
-
         .nav-links a:hover::after { width: 100%; }
 
-
-
         /* --- HERO SECTION --- */
-
         .hero {
-
             padding: 9rem 0 7rem 0;
-
             max-width: 900px;
-
         }
-
-
 
         .hero h1 {
-
             font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-
             line-height: 1.05;
-
             margin-bottom: 2rem;
-
             letter-spacing: -0.03em;
-
             font-weight: 700;
-
         }
-
-
 
         /* Clase para destacar texto en rojo */
-
         .highlight {
-
             color: var(--brand-color);
-
         }
-
-
 
         .hero p {
-
             font-size: 1.3rem;
-
             color: var(--text-secondary);
-
             max-width: 650px;
-
             font-weight: 400;
-
         }
-
-
 
         /* --- GRID DE PROYECTOS --- */
-
         .work-grid {
-
             display: grid;
-
             grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-
             gap: 5rem 3rem;
-
             margin-bottom: 10rem;
-
         }
-
-
 
         .project-card {
-
             cursor: pointer;
-
             display: block;
-
         }
-
-
 
         .image-wrapper {
-
             background-color: #f4f4f4;
-
             aspect-ratio: 4/3;
-
             overflow: hidden;
-
             margin-bottom: 1.2rem;
-
             position: relative;
-
         }
-
-
 
         .image-wrapper img {
-
             width: 100%;
-
             height: 100%;
-
             object-fit: cover;
-
             transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1);
-
             filter: grayscale(100%); /* Empezamos en blanco y negro */
-
         }
-
-
 
         /* Hover Card: Vuelve el color y hace zoom */
-
         .project-card:hover .image-wrapper img {
-
             transform: scale(1.03);
-
             filter: grayscale(0%); /* El color aparece al interactuar */
-
         }
-
-
 
         .project-info {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: flex-start;
-
             padding-top: 0.5rem;
-
             border-top: 1px solid transparent;
-
             transition: border-color 0.3s ease;
-
         }
-
-
 
         .project-card:hover .project-info {
-
             border-top: 1px solid var(--brand-color); /* Línea roja sutil al hover */
-
         }
-
-
 
         .project-title {
-
             font-size: 1.2rem;
-
             font-weight: 600;
-
             display: block;
-
             margin-bottom: 0.3rem;
-
         }
-
-
 
         .project-tags {
-
             font-size: 0.95rem;
-
             color: var(--text-secondary);
-
         }
-
-
 
         .year {
-
             font-size: 0.95rem;
-
             color: var(--text-secondary);
-
             font-variant-numeric: tabular-nums;
-
         }
-
-
 
         /* --- FOOTER --- */
-
         footer {
-
             border-top: 1px solid #e0e0e0;
-
             padding: 4rem 0;
-
             margin-top: 4rem;
-
             display: flex;
-
             flex-direction: column;
-
             gap: 2rem;
-
         }
-
-
 
         .footer-content {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: flex-end;
-
         }
-
-
 
         .email-link {
-
             font-size: 1.5rem;
-
             font-weight: 600;
-
         }
-
         
-
         .email-link:hover {
-
             color: var(--brand-color);
-
         }
-
-
 
         .socials a {
-
             margin-left: 2rem;
-
             font-size: 0.95rem;
-
             color: var(--text-secondary);
-
         }
-
         .socials a:hover { color: var(--brand-color); }
 
-
-
         /* --- MOBILE --- */
-
         @media (max-width: 768px) {
-
             .work-grid {
-
                 grid-template-columns: 1fr;
-
                 gap: 3.5rem;
-
             }
-
             .hero { padding: 5rem 0 3rem 0; }
-
             .footer-content {
-
                 flex-direction: column;
-
                 align-items: flex-start;
-
                 gap: 2rem;
-
             }
-
             .socials a { margin-left: 0; margin-right: 1.5rem; }
-
         }
-
     </style>
-
 </head>
-
 <body>
 
-
-
     <div class="container">
-
         <header>
-
             <a href="#" class="logo">Leonardo López Fimbres</a>
-
             <nav class="nav-links">
-
                 <a href="#proyectos">Proyectos</a>
-
                 <a href="#perfil">Perfil</a>
-
                 <a href="#contacto">Contacto</a>
-
             </nav>
-
         </header>
 
-
-
         <section class="hero">
-
             <h1>Diseñador Creativo & <br>
-
             <span class="highlight">Estratega de Marca.</span></h1>
-
             <p>Especializado en traducir tendencias de mercado en calzado funcional. Mi enfoque une la visión estética de la moda con la precisión de los negocios.</p>
-
         </section>
-
-
 
         <section id="proyectos" class="work-grid">
-
             
-
             <article class="project-card">
-
                 <div class="image-wrapper">
-
                     <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?q=80&w=2050&auto=format&fit=crop" alt="Calzado Deportivo">
-
                 </div>
-
                 <div class="project-info">
-
                     <div>
-
                         <span class="project-title">Urban Runner X1</span>
-
                         <div class="project-tags">Diseño de Calzado / Modelado 3D</div>
-
                     </div>
-
                     <span class="year">2024</span>
-
                 </div>
-
             </article>
 
-
-
             <article class="project-card">
-
                 <div class="image-wrapper">
-
                     <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1974&auto=format&fit=crop" alt="Sneaker Concept">
-
                 </div>
-
                 <div class="project-info">
-
                     <div>
-
                         <span class="project-title">Colección Híbrida</span>
-
                         <div class="project-tags">Desarrollo de Producto / Estrategia</div>
-
                     </div>
-
                     <span class="year">2023</span>
-
                 </div>
-
             </article>
 
-
-
             <article class="project-card">
-
                 <div class="image-wrapper">
-
                     <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=2080&auto=format&fit=crop" alt="Botas Concepto">
-
                 </div>
-
                 <div class="project-info">
-
                     <div>
-
                         <span class="project-title">Tactical Redesign</span>
-
                         <div class="project-tags">Diseño Industrial / Sketching</div>
-
                     </div>
-
                     <span class="year">2023</span>
-
                 </div>
-
             </article>
-
-
 
             <article class="project-card">
-
                 <div class="image-wrapper">
-
                     <img src="https://images.unsplash.com/photo-1627443152766-3d2372d80d7d?q=80&w=2080&auto=format&fit=crop" alt="Bocetos y Proceso">
-
                 </div>
-
                 <div class="project-info">
-
                     <div>
-
                         <span class="project-title">Sketchbook & Procesos</span>
-
                         <div class="project-tags">Investigación / Bocetaje</div>
-
                     </div>
-
                     <span class="year">En curso</span>
-
                 </div>
-
             </article>
-
-
 
         </section>
 
-
-
         <footer id="contacto">
-
             <div class="footer-content">
-
                 <div>
-
                     <p style="margin-bottom: 0.5rem; color: var(--text-secondary);">¿Hablamos?</p>
-
                     <a href="mailto:leo@email.com" class="email-link">leofimbres@email.com</a>
-
                 </div>
-
                 <div class="socials">
-
                     <a href="#" target="_blank">LinkedIn</a>
-
                     <a href="#" target="_blank">Instagram</a>
-
                     <a href="#" target="_blank">Behance</a>
-
                 </div>
-
             </div>
-
             <div style="font-size: 0.8rem; margin-top: 2rem;">
-
                 &copy; 2024 Leonardo López Fimbres
-
             </div>
-
         </footer>
-
     </div>
 
-
-
 </body>
-
 </html>
