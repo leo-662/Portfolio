@@ -159,10 +159,10 @@
             filter: grayscale(0%); /* El color aparece al interactuar */
         }
 
+        /* Contenedor principal de info del proyecto */
         .project-info {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            flex-direction: column; /* Cambiado a columna para apilar header y descripción */
             padding-top: 0.5rem;
             border-top: 1px solid transparent;
             transition: border-color 0.3s ease;
@@ -170,6 +170,14 @@
 
         .project-card:hover .project-info {
             border-top: 1px solid var(--brand-color); /* Línea roja sutil al hover */
+        }
+
+        /* Cabecera del proyecto (Título + Año) */
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
         }
 
         .project-title {
@@ -188,6 +196,23 @@
             font-size: 0.95rem;
             color: var(--text-secondary);
             font-variant-numeric: tabular-nums;
+            white-space: nowrap; /* Evita que el año se rompa */
+        }
+
+        /* Nueva clase para las descripciones */
+        .project-description {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .project-description p {
+            margin-bottom: 0.8rem;
+        }
+        
+        .project-description p:last-child {
+            margin-bottom: 0;
         }
 
         /* --- FOOTER --- */
@@ -308,11 +333,16 @@
                     <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop" alt="Adidas x Natanael Cano">
                 </div>
                 <div class="project-info">
-                    <div>
-                        <span class="project-title">Adidas Rivalry x Natanael Cano</span>
-                        <div class="project-tags">Footwear Design / Collab Concept</div>
+                    <div class="project-header">
+                        <div>
+                            <span class="project-title">Adidas Rivalry x Natanael Cano</span>
+                            <div class="project-tags">Footwear Design / Collab Concept</div>
+                        </div>
+                        <span class="year">2024</span>
                     </div>
-                    <span class="year">2024</span>
+                    <div class="project-description">
+                        <p>Así es como luciría una colaboración entre el cantante mexicano y Adidas. Un sneaker versátil: diseñado para la tabla, las calles y el escenario.</p>
+                    </div>
                 </div>
             </article>
 
@@ -323,11 +353,16 @@
                     <img src="https://images.unsplash.com/photo-1577471488278-161db3865c57?q=80&w=2069&auto=format&fit=crop" alt="Colección Rayos de Hermosillo">
                 </div>
                 <div class="project-info">
-                    <div>
-                        <span class="project-title">Urban City Collection: Rayos</span>
-                        <div class="project-tags">Sportswear / Contest Finalist</div>
+                    <div class="project-header">
+                        <div>
+                            <span class="project-title">Urban City Collection: Rayos</span>
+                            <div class="project-tags">Sportswear / Contest Finalist</div>
+                        </div>
+                        <span class="year">2024</span>
                     </div>
-                    <span class="year">2024</span>
+                    <div class="project-description">
+                        <p>Diseño de jersey "Mezquite" para el concurso Urban City Collection, organizado por el equipo profesional Rayos de Hermosillo, donde fui finalista. Me inspiré en la flora y fauna local, particularmente en cómo este árbol nativo prospera en el desierto, tal como nosotros florecemos a pesar de las condiciones extremas.</p>
+                    </div>
                 </div>
             </article>
 
@@ -338,11 +373,17 @@
                     <img src="https://images.unsplash.com/photo-1515524738708-327f6b0033a7?q=80&w=2070&auto=format&fit=crop" alt="El Orgullo de Casa">
                 </div>
                 <div class="project-info">
-                    <div>
-                        <span class="project-title">El Orgullo de Casa</span>
-                        <div class="project-tags">Fashion Design / Cultural Narrative</div>
+                    <div class="project-header">
+                        <div>
+                            <span class="project-title">El Orgullo de Casa</span>
+                            <div class="project-tags">Fashion Design / Cultural Narrative</div>
+                        </div>
+                        <span class="year">2024</span>
                     </div>
-                    <span class="year">2024</span>
+                    <div class="project-description">
+                        <p>Esta colección explora cómo los atletas sirven como poderosos íconos culturales para el pueblo latinoamericano. El viaje de superestrella a leyenda es nuestra fuente de inspiración, no solo en el deporte, sino como símbolos de arte y cultura para sus compatriotas.</p>
+                        <p>Exploramos las diferentes etapas del viaje de un atleta para contar una historia lineal, desde el comienzo de su reconocimiento público hasta alcanzar el pedestal más alto.</p>
+                    </div>
                 </div>
             </article>
 
@@ -353,11 +394,16 @@
                     <img src="https://images.unsplash.com/photo-1597045566677-8cf032ed6634?q=80&w=1974&auto=format&fit=crop" alt="Saucony Mac n Cheese">
                 </div>
                 <div class="project-info">
-                    <div>
-                        <span class="project-title">Westside Gunn x Saucony</span>
-                        <div class="project-tags">Footwear Concept / Research</div>
+                    <div class="project-header">
+                        <div>
+                            <span class="project-title">Westside Gunn x Saucony</span>
+                            <div class="project-tags">Footwear Concept / Research</div>
+                        </div>
+                        <span class="year">2023</span>
                     </div>
-                    <span class="year">2023</span>
+                    <div class="project-description">
+                        <p>Concepto "Mac n' Cheese" inspirado en el rapero de Buffalo, su comida favorita y su colaboración con Saucony. Para crear esta silueta nos sumergimos en la historia del platillo y su conexión con la comunidad negra en EE.UU., traído desde Francia por James Hemings.</p>
+                    </div>
                 </div>
             </article>
 
@@ -368,11 +414,16 @@
                     <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2073&auto=format&fit=crop" alt="Misfit Runway">
                 </div>
                 <div class="project-info">
-                    <div>
-                        <span class="project-title">MISFIT: Reinventing EDO</span>
-                        <div class="project-tags">Haute Couture / Avant-Garde</div>
+                    <div class="project-header">
+                        <div>
+                            <span class="project-title">MISFIT: Reinventing EDO</span>
+                            <div class="project-tags">Haute Couture / Avant-Garde</div>
+                        </div>
+                        <span class="year">2023</span>
                     </div>
-                    <span class="year">2023</span>
+                    <div class="project-description">
+                        <p>El objetivo fue mostrar el período histórico EDO a través de la ropa, yuxtaponiendo siluetas antiguas y contemporáneas. La idea rectora reinventa siluetas japonesas históricas, narrando un fragmento del pasado y destacando el contraste entre la represión de esa era y la libertad de este diseño.</p>
+                    </div>
                 </div>
             </article>
 
@@ -383,11 +434,16 @@
                     <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070&auto=format&fit=crop" alt="Country Club Social Night">
                 </div>
                 <div class="project-info">
-                    <div>
-                        <span class="project-title">Country Club Social Night</span>
-                        <div class="project-tags">Neo-Vintage / Fashion Collection</div>
+                    <div class="project-header">
+                        <div>
+                            <span class="project-title">Country Club Social Night</span>
+                            <div class="project-tags">Neo-Vintage / Fashion Collection</div>
+                        </div>
+                        <span class="year">2023</span>
                     </div>
-                    <span class="year">2023</span>
+                    <div class="project-description">
+                        <p>Inspirada en la leyenda del Casino del Diablo de Hermosillo (años 50). La colección fusiona lo mítico con lo "neo-vintage", mezclando prendas y tradiciones de aquella época con estilos contemporáneos.</p>
+                    </div>
                 </div>
             </article>
 
@@ -398,11 +454,16 @@
                     <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop" alt="AI Concepts">
                 </div>
                 <div class="project-info">
-                    <div>
-                        <span class="project-title">Design Concepts + AI</span>
-                        <div class="project-tags">Generative AI / Vizcom / Prototyping</div>
+                    <div class="project-header">
+                        <div>
+                            <span class="project-title">Design Concepts + AI</span>
+                            <div class="project-tags">Generative AI / Vizcom / Prototyping</div>
+                        </div>
+                        <span class="year">2024</span>
                     </div>
-                    <span class="year">2024</span>
+                    <div class="project-description">
+                        <p>Diseños conceptuales para atletas locales: Héctor 'Toro' Corrales (MMA) y César Salazar (Beisbol). Ambos conceptos cuentan con renders generados por Inteligencia Artificial (Vizcom), inspirados en sus trayectorias y equipos.</p>
+                    </div>
                 </div>
             </article>
 
