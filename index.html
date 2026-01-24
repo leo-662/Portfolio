@@ -4,36 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leonardo López Fimbres | Diseño & Estrategia</title>
+    <!-- FAVICON AGREGADO -->
+    <link rel="icon" href="IV-perro.png" type="image/png">
+    
     <style>
         /* --- ESTILOS BASE & VARIABLES --- */
         :root {
             --bg-color: #ffffff;
             --text-main: #111111;
             --text-secondary: #555555;
-            /* Rojo Oscuro tipo Google Docs */
             --brand-color: #990000; 
             --spacing-unit: 2rem;
             --whatsapp-green: #25D366;
         }
 
-        /* Selección de texto elegante */
-        ::selection {
-            background: var(--brand-color);
-            color: #fff;
-        }
+        ::selection { background: var(--brand-color); color: #fff; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Helvetica es el estándar en moda */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.5;
@@ -43,7 +35,6 @@
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
         ul { list-style: none; }
 
-        /* --- LAYOUT --- */
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -58,23 +49,18 @@
             align-items: center;
         }
 
-        .logo {
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: -0.02em;
-            text-transform: uppercase;
-            color: var(--text-main);
+        /* Ajuste para el Logo de Imagen */
+        .logo-img {
+            height: 50px; /* Ajustado ligeramente para mejor visibilidad */
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .logo-img:hover {
+            opacity: 0.8;
         }
 
-        /* Efecto hover en el logo */
-        .logo:hover {
-            color: var(--brand-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-        }
+        .nav-links { display: flex; gap: 2.5rem; }
 
         .nav-links a {
             font-size: 0.9rem;
@@ -83,7 +69,6 @@
             position: relative;
         }
 
-        /* Línea roja animada al pasar el mouse por el menú */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -98,13 +83,17 @@
         .nav-links a:hover { color: var(--text-main); }
         .nav-links a:hover::after { width: 100%; }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION (PERFIL) --- */
         .hero {
             padding: 9rem 0 7rem 0;
-            max-width: 900px;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 300px; /* Texto a la izq, foto a la derecha */
+            gap: 4rem;
+            align-items: center;
         }
 
-        .hero h1 {
+        .hero-text h1 {
             font-size: clamp(2.5rem, 5.5vw, 4.5rem);
             line-height: 1.05;
             margin-bottom: 2rem;
@@ -112,16 +101,34 @@
             font-weight: 700;
         }
 
-        /* Clase para destacar texto en rojo */
-        .highlight {
-            color: var(--brand-color);
-        }
+        .highlight { color: var(--brand-color); }
 
-        .hero p {
+        .hero-text p {
             font-size: 1.3rem;
             color: var(--text-secondary);
             max-width: 650px;
             font-weight: 400;
+        }
+
+        /* Estilo para tu foto de perfil (LEO) */
+        .profile-img-wrapper {
+            width: 250px;
+            height: 320px;
+            overflow: hidden;
+            border-radius: 4px; /* Un poco de borde redondeado sutil */
+            position: relative;
+        }
+
+        .profile-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .profile-img-wrapper:hover img {
+            filter: grayscale(0%);
         }
 
         /* --- GRID DE PROYECTOS --- */
@@ -132,10 +139,7 @@
             margin-bottom: 10rem;
         }
 
-        .project-card {
-            cursor: pointer;
-            display: block;
-        }
+        .project-card { cursor: pointer; display: block; }
 
         .image-wrapper {
             background-color: #f4f4f4;
@@ -150,29 +154,20 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1);
-            filter: grayscale(100%); /* Empezamos en blanco y negro */
         }
 
-        /* Hover Card: Vuelve el color y hace zoom */
-        .project-card:hover .image-wrapper img {
-            transform: scale(1.03);
-            filter: grayscale(0%); /* El color aparece al interactuar */
-        }
+        .project-card:hover .image-wrapper img { transform: scale(1.03); }
 
-        /* Contenedor principal de info del proyecto */
         .project-info {
             display: flex;
-            flex-direction: column; /* Cambiado a columna para apilar header y descripción */
+            flex-direction: column;
             padding-top: 0.5rem;
             border-top: 1px solid transparent;
             transition: border-color 0.3s ease;
         }
 
-        .project-card:hover .project-info {
-            border-top: 1px solid var(--brand-color); /* Línea roja sutil al hover */
-        }
+        .project-card:hover .project-info { border-top: 1px solid var(--brand-color); }
 
-        /* Cabecera del proyecto (Título + Año) */
         .project-header {
             display: flex;
             justify-content: space-between;
@@ -187,19 +182,15 @@
             margin-bottom: 0.3rem;
         }
 
-        .project-tags {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
+        .project-tags { font-size: 0.95rem; color: var(--text-secondary); }
 
         .year {
             font-size: 0.95rem;
             color: var(--text-secondary);
             font-variant-numeric: tabular-nums;
-            white-space: nowrap; /* Evita que el año se rompa */
+            white-space: nowrap;
         }
 
-        /* Nueva clase para las descripciones */
         .project-description {
             margin-top: 1rem;
             font-size: 0.95rem;
@@ -207,13 +198,8 @@
             line-height: 1.6;
         }
         
-        .project-description p {
-            margin-bottom: 0.8rem;
-        }
-        
-        .project-description p:last-child {
-            margin-bottom: 0;
-        }
+        .project-description p { margin-bottom: 0.8rem; }
+        .project-description p:last-child { margin-bottom: 0; }
 
         /* --- FOOTER --- */
         footer {
@@ -231,77 +217,47 @@
             align-items: flex-end;
         }
 
-        .email-link {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        
-        .email-link:hover {
-            color: var(--brand-color);
-        }
+        .email-link { font-size: 1.5rem; font-weight: 600; }
+        .email-link:hover { color: var(--brand-color); }
 
-        .socials a {
-            margin-left: 2rem;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
+        .socials a { margin-left: 2rem; font-size: 0.95rem; color: var(--text-secondary); }
         .socials a:hover { color: var(--brand-color); }
 
-        /* --- WHATSAPP FLOATING BUTTON --- */
+        /* --- WHATSAPP --- */
         .whatsapp-float {
             position: fixed;
-            bottom: 40px;
-            right: 40px;
+            bottom: 40px; right: 40px;
             background-color: var(--whatsapp-green);
             color: #FFF;
-            width: 60px;
-            height: 60px;
+            width: 60px; height: 60px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             z-index: 1000;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-        }
-
-        .whatsapp-icon {
-            width: 35px;
-            height: 35px;
-            fill: white;
-        }
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .whatsapp-icon { width: 35px; height: 35px; fill: white; }
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
-            .work-grid {
-                grid-template-columns: 1fr;
-                gap: 3.5rem;
-            }
-            .hero { padding: 5rem 0 3rem 0; }
-            
-            .footer-content {
-                flex-direction: column;
-                align-items: flex-start;
+            .hero {
+                grid-template-columns: 1fr; /* Una sola columna en móvil */
+                padding: 5rem 0 3rem 0;
                 gap: 2rem;
             }
+            .profile-img-wrapper {
+                width: 100%;
+                max-width: 300px; /* Limitar ancho en móvil */
+                height: 350px;
+                margin: 0 auto; /* Centrar foto */
+                order: -1; /* Poner foto arriba del texto en móvil si prefieres, o quita esta línea para dejarla abajo */
+            }
+            .work-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+            .footer-content { flex-direction: column; align-items: flex-start; gap: 2rem; }
             .socials a { margin-left: 0; margin-right: 1.5rem; }
-
-            /* Ajuste botón whatsapp móvil */
-            .whatsapp-float {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-            }
-            .whatsapp-icon {
-                width: 28px;
-                height: 28px;
-            }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+            .whatsapp-icon { width: 28px; height: 28px; }
         }
     </style>
 </head>
@@ -309,7 +265,11 @@
 
     <div class="container">
         <header>
-            <a href="#" class="logo">Leonardo López Fimbres</a>
+            <!-- LOGO: Actualizado a IV-perro.png -->
+            <a href="#">
+                <img src="IV-perro.png" alt="Leonardo López Fimbres" class="logo-img">
+            </a>
+            
             <nav class="nav-links">
                 <a href="#proyectos">Proyectos</a>
                 <a href="#perfil">Perfil</a>
@@ -318,19 +278,26 @@
         </header>
 
         <section class="hero" id="perfil">
-            <h1>Diseñador Creativo & <br>
-            <span class="highlight">Estratega de Marca.</span></h1>
-            <p>Especializado en traducir tendencias de mercado en calzado funcional. Mi enfoque une la visión estética de la moda con la precisión de los negocios.</p>
+            <div class="hero-text">
+                <h1>Diseñador Creativo & <br>
+                <span class="highlight">Estratega de Marca.</span></h1>
+                <p>Especializado en traducir tendencias de mercado en calzado funcional. Mi enfoque une la visión estética de la moda con la precisión de los negocios.</p>
+            </div>
+            
+            <!-- FOTO DE PERFIL: Asegúrate que el archivo se llame 'leo.jpg' -->
+            <div class="profile-img-wrapper">
+                <img src="leo.jpg" alt="Leonardo López Fimbres">
+            </div>
         </section>
 
-        <!-- SECCIÓN DE PROYECTOS REORGANIZADA -->
+        <!-- SECCIÓN DE PROYECTOS -->
         <section id="proyectos" class="work-grid">
             
-            <!-- PROYECTO 1: EL GANCHO (ADIDAS) -->
+            <!-- PROYECTO 1 -->
             <article class="project-card">
                 <div class="image-wrapper">
-                    <!-- REEMPLAZAR CON TU IMAGEN DE ADIDAS -->
-                    <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop" alt="Adidas x Natanael Cano">
+                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Adidas' -->
+                    <img src="Adidas/portada.jpg" alt="Adidas x Natanael Cano" onerror="this.src='https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -346,11 +313,11 @@
                 </div>
             </article>
 
-            <!-- PROYECTO 2: VALIDACIÓN PROFESIONAL (RAYOS) -->
+            <!-- PROYECTO 2 -->
             <article class="project-card">
                 <div class="image-wrapper">
-                     <!-- REEMPLAZAR CON TU IMAGEN DE RAYOS DE HERMOSILLO -->
-                    <img src="https://images.unsplash.com/photo-1577471488278-161db3865c57?q=80&w=2069&auto=format&fit=crop" alt="Colección Rayos de Hermosillo">
+                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Rayos' -->
+                    <img src="Rayos/portada.jpg" alt="Colección Rayos de Hermosillo" onerror="this.src='https://images.unsplash.com/photo-1577471488278-161db3865c57?q=80&w=2069&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -361,16 +328,16 @@
                         <span class="year">2024</span>
                     </div>
                     <div class="project-description">
-                        <p>Diseño de jersey "Mezquite" para el concurso Urban City Collection, organizado por el equipo profesional Rayos de Hermosillo, donde fui finalista. Me inspiré en la flora y fauna local, particularmente en cómo este árbol nativo prospera en el desierto, tal como nosotros florecemos a pesar de las condiciones extremas.</p>
+                        <p>Diseño de jersey "Mezquite" para el concurso Urban City Collection, organizado por el equipo profesional Rayos de Hermosillo. Inspirado en la flora y fauna local del desierto.</p>
                     </div>
                 </div>
             </article>
 
-            <!-- PROYECTO 3: NARRATIVA (ORGULLO) -->
+            <!-- PROYECTO 3 -->
             <article class="project-card">
                 <div class="image-wrapper">
-                     <!-- REEMPLAZAR CON TU IMAGEN DE ATLETAS LATINOS -->
-                    <img src="https://images.unsplash.com/photo-1515524738708-327f6b0033a7?q=80&w=2070&auto=format&fit=crop" alt="El Orgullo de Casa">
+                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Orgullo' -->
+                    <img src="Orgullo/portada.jpg" alt="El Orgullo de Casa" onerror="this.src='https://images.unsplash.com/photo-1515524738708-327f6b0033a7?q=80&w=2070&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -381,17 +348,16 @@
                         <span class="year">2024</span>
                     </div>
                     <div class="project-description">
-                        <p>Esta colección explora cómo los atletas sirven como poderosos íconos culturales para el pueblo latinoamericano. El viaje de superestrella a leyenda es nuestra fuente de inspiración, no solo en el deporte, sino como símbolos de arte y cultura para sus compatriotas.</p>
-                        <p>Exploramos las diferentes etapas del viaje de un atleta para contar una historia lineal, desde el comienzo de su reconocimiento público hasta alcanzar el pedestal más alto.</p>
+                        <p>Colección que explora cómo los atletas sirven como íconos culturales para Latinoamérica. El viaje de superestrella a leyenda es nuestra fuente de inspiración.</p>
                     </div>
                 </div>
             </article>
 
-            <!-- PROYECTO 4: TÉCNICA (SAUCONY) -->
+            <!-- PROYECTO 4 -->
             <article class="project-card">
                 <div class="image-wrapper">
-                     <!-- REEMPLAZAR CON TU IMAGEN DE SAUCONY -->
-                    <img src="https://images.unsplash.com/photo-1597045566677-8cf032ed6634?q=80&w=1974&auto=format&fit=crop" alt="Saucony Mac n Cheese">
+                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Saucony' -->
+                    <img src="Saucony/portada.jpg" alt="Saucony Mac n Cheese" onerror="this.src='https://images.unsplash.com/photo-1597045566677-8cf032ed6634?q=80&w=1974&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -402,16 +368,16 @@
                         <span class="year">2023</span>
                     </div>
                     <div class="project-description">
-                        <p>Concepto "Mac n' Cheese" inspirado en el rapero de Buffalo, su comida favorita y su colaboración con Saucony. Para crear esta silueta nos sumergimos en la historia del platillo y su conexión con la comunidad negra en EE.UU., traído desde Francia por James Hemings.</p>
+                        <p>Concepto "Mac n' Cheese" inspirado en el rapero de Buffalo. Nos sumergimos en la historia del platillo y su conexión con la comunidad negra en EE.UU.</p>
                     </div>
                 </div>
             </article>
 
-             <!-- PROYECTO 5: VERSATILIDAD (MISFIT) -->
+             <!-- PROYECTO 5 -->
              <article class="project-card">
                 <div class="image-wrapper">
-                     <!-- REEMPLAZAR CON TU IMAGEN DE EDO / MISFIT -->
-                    <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2073&auto=format&fit=crop" alt="Misfit Runway">
+                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Misfit' -->
+                    <img src="Misfit/portada.jpg" alt="Misfit Runway" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2073&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -422,16 +388,16 @@
                         <span class="year">2023</span>
                     </div>
                     <div class="project-description">
-                        <p>El objetivo fue mostrar el período histórico EDO a través de la ropa, yuxtaponiendo siluetas antiguas y contemporáneas. La idea rectora reinventa siluetas japonesas históricas, narrando un fragmento del pasado y destacando el contraste entre la represión de esa era y la libertad de este diseño.</p>
+                        <p>Reinvención de siluetas japonesas históricas (Periodo EDO), narrando un fragmento del pasado a través de un lente contemporáneo y de alta costura.</p>
                     </div>
                 </div>
             </article>
 
-            <!-- PROYECTO 6: ESTILO (COUNTRY CLUB) -->
+            <!-- PROYECTO 6 -->
             <article class="project-card">
                 <div class="image-wrapper">
-                     <!-- REEMPLAZAR CON TU IMAGEN DE CASINO DEL DIABLO -->
-                    <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070&auto=format&fit=crop" alt="Country Club Social Night">
+                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'CountryClub' -->
+                    <img src="CountryClub/portada.jpg" alt="Country Club Social Night" onerror="this.src='https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -442,16 +408,16 @@
                         <span class="year">2023</span>
                     </div>
                     <div class="project-description">
-                        <p>Inspirada en la leyenda del Casino del Diablo de Hermosillo (años 50). La colección fusiona lo mítico con lo "neo-vintage", mezclando prendas y tradiciones de aquella época con estilos contemporáneos.</p>
+                        <p>Inspirada en la leyenda del Casino del Diablo. Fusión "neo-vintage" de prendas y tradiciones de los años 50 con estilos actuales.</p>
                     </div>
                 </div>
             </article>
 
-             <!-- PROYECTO 7: INNOVACIÓN (AI) -->
+             <!-- PROYECTO 7 -->
              <article class="project-card">
                 <div class="image-wrapper">
-                     <!-- REEMPLAZAR CON TU IMAGEN DE RENDERS IA -->
-                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop" alt="AI Concepts">
+                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'AI' -->
+                    <img src="AI/portada.jpg" alt="AI Concepts" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -462,7 +428,7 @@
                         <span class="year">2024</span>
                     </div>
                     <div class="project-description">
-                        <p>Diseños conceptuales para atletas locales: Héctor 'Toro' Corrales (MMA) y César Salazar (Beisbol). Ambos conceptos cuentan con renders generados por Inteligencia Artificial (Vizcom), inspirados en sus trayectorias y equipos.</p>
+                        <p>Diseños conceptuales para atletas locales, utilizando renders generados por Inteligencia Artificial (Vizcom) para prototipado rápido.</p>
                     </div>
                 </div>
             </article>
@@ -487,10 +453,8 @@
         </footer>
     </div>
 
-    <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a href="https://wa.me/526623530191" class="whatsapp-float" target="_blank" aria-label="Chat en WhatsApp">
         <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <!-- Icono SVG de WhatsApp (FontAwesome Free) -->
             <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-4-10.5-6.8z"/>
         </svg>
     </a>
