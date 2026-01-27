@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leonardo López Fimbres | Diseño & Estrategia</title>
-    <!-- FAVICON AGREGADO -->
+    <!-- FAVICON -->
     <link rel="icon" href="IV-perro.png" type="image/png">
     
     <style>
@@ -51,14 +51,12 @@
 
         /* Ajuste para el Logo de Imagen */
         .logo-img {
-            height: 50px; /* Ajustado ligeramente para mejor visibilidad */
+            height: 50px; 
             width: auto;
             object-fit: contain;
         }
         
-        .logo-img:hover {
-            opacity: 0.8;
-        }
+        .logo-img:hover { opacity: 0.8; }
 
         .nav-links { display: flex; gap: 2.5rem; }
 
@@ -115,7 +113,7 @@
             width: 250px;
             height: 320px;
             overflow: hidden;
-            border-radius: 4px; /* Un poco de borde redondeado sutil */
+            border-radius: 4px;
             position: relative;
         }
 
@@ -127,9 +125,7 @@
             transition: filter 0.5s ease;
         }
 
-        .profile-img-wrapper:hover img {
-            filter: grayscale(0%);
-        }
+        .profile-img-wrapper:hover img { filter: grayscale(0%); }
 
         /* --- GRID DE PROYECTOS --- */
         .work-grid {
@@ -242,16 +238,16 @@
         /* --- MOBILE --- */
         @media (max-width: 768px) {
             .hero {
-                grid-template-columns: 1fr; /* Una sola columna en móvil */
+                grid-template-columns: 1fr;
                 padding: 5rem 0 3rem 0;
                 gap: 2rem;
             }
             .profile-img-wrapper {
                 width: 100%;
-                max-width: 300px; /* Limitar ancho en móvil */
+                max-width: 300px;
                 height: 350px;
-                margin: 0 auto; /* Centrar foto */
-                order: -1; /* Poner foto arriba del texto en móvil si prefieres, o quita esta línea para dejarla abajo */
+                margin: 0 auto;
+                order: -1; 
             }
             .work-grid { grid-template-columns: 1fr; gap: 3.5rem; }
             .footer-content { flex-direction: column; align-items: flex-start; gap: 2rem; }
@@ -265,7 +261,6 @@
 
     <div class="container">
         <header>
-            <!-- LOGO: Actualizado a IV-perro.png -->
             <a href="#">
                 <img src="IV-perro.png" alt="Leonardo López Fimbres" class="logo-img">
             </a>
@@ -284,7 +279,6 @@
                 <p>Especializado en traducir tendencias de mercado en calzado funcional. Mi enfoque une la visión estética de la moda con la precisión de los negocios.</p>
             </div>
             
-            <!-- FOTO DE PERFIL: Asegúrate que el archivo se llame 'leo.jpg' -->
             <div class="profile-img-wrapper">
                 <img src="leo.jpg" alt="Leonardo López Fimbres">
             </div>
@@ -293,11 +287,11 @@
         <!-- SECCIÓN DE PROYECTOS -->
         <section id="proyectos" class="work-grid">
             
-            <!-- PROYECTO 1 -->
+            <!-- PROYECTO 1: ADIDAS -->
             <article class="project-card">
                 <div class="image-wrapper">
-                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Adidas' -->
-                    <img src="Adidas/portada.jpg" alt="Adidas x Natanael Cano" onerror="this.src='https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop'">
+                    <!-- Carpeta 'Adidas', Imagen 'nata-par.png' -->
+                    <img src="Adidas/nata-par.png" alt="Adidas x Natanael Cano" onerror="this.src='https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -313,11 +307,11 @@
                 </div>
             </article>
 
-            <!-- PROYECTO 2 -->
+            <!-- PROYECTO 2: RAYOS -->
             <article class="project-card">
                 <div class="image-wrapper">
-                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Rayos' -->
-                    <img src="Rayos/portada.jpg" alt="Colección Rayos de Hermosillo" onerror="this.src='https://images.unsplash.com/photo-1577471488278-161db3865c57?q=80&w=2069&auto=format&fit=crop'">
+                    <!-- Carpeta 'Rayos', Imagen 'front-urban.png' -->
+                    <img src="Rayos/front-urban.png" alt="Colección Rayos de Hermosillo" onerror="this.src='https://images.unsplash.com/photo-1577471488278-161db3865c57?q=80&w=2069&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -333,11 +327,11 @@
                 </div>
             </article>
 
-            <!-- PROYECTO 3 -->
+            <!-- PROYECTO 3: ORGULLO -->
             <article class="project-card">
                 <div class="image-wrapper">
-                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Orgullo' -->
-                    <img src="Orgullo/portada.jpg" alt="El Orgullo de Casa" onerror="this.src='https://images.unsplash.com/photo-1515524738708-327f6b0033a7?q=80&w=2070&auto=format&fit=crop'">
+                    <!-- Carpeta 'Orgullo', Imagen '1-orgullo.webp' -->
+                    <img src="Orgullo/1-orgullo.webp" alt="El Orgullo de Casa" onerror="this.src='https://images.unsplash.com/photo-1515524738708-327f6b0033a7?q=80&w=2070&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -353,11 +347,11 @@
                 </div>
             </article>
 
-            <!-- PROYECTO 4 -->
+            <!-- PROYECTO 4: SAUCONY -->
             <article class="project-card">
                 <div class="image-wrapper">
-                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Saucony' -->
-                    <img src="Saucony/portada.jpg" alt="Saucony Mac n Cheese" onerror="this.src='https://images.unsplash.com/photo-1597045566677-8cf032ed6634?q=80&w=1974&auto=format&fit=crop'">
+                    <!-- Carpeta 'Saucony', Imagen 'wsg-h.png' (H = Horizontal, mejor para portada) -->
+                    <img src="Saucony/wsg-h.png" alt="Saucony Mac n Cheese" onerror="this.src='https://images.unsplash.com/photo-1597045566677-8cf032ed6634?q=80&w=1974&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -373,11 +367,11 @@
                 </div>
             </article>
 
-             <!-- PROYECTO 5 -->
+             <!-- PROYECTO 5: MISFIT -->
              <article class="project-card">
                 <div class="image-wrapper">
-                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'Misfit' -->
-                    <img src="Misfit/portada.jpg" alt="Misfit Runway" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2073&auto=format&fit=crop'">
+                    <!-- Carpeta 'Misfit', Imagen 'edo-1.webp' -->
+                    <img src="Misfit/edo-1.webp" alt="Misfit Runway" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2073&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -393,11 +387,11 @@
                 </div>
             </article>
 
-            <!-- PROYECTO 6 -->
+            <!-- PROYECTO 6: COUNTRY CLUB -->
             <article class="project-card">
                 <div class="image-wrapper">
-                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'CountryClub' -->
-                    <img src="CountryClub/portada.jpg" alt="Country Club Social Night" onerror="this.src='https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070&auto=format&fit=crop'">
+                    <!-- Mantenemos Placeholder - No había imágenes de Country Club en tu lista -->
+                    <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070&auto=format&fit=crop" alt="Country Club Social Night">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
@@ -413,11 +407,11 @@
                 </div>
             </article>
 
-             <!-- PROYECTO 7 -->
+             <!-- PROYECTO 7: CONCEPTS + AI -->
              <article class="project-card">
                 <div class="image-wrapper">
-                    <!-- IMPORTANTE: Cambia 'portada.jpg' por el nombre de archivo en tu carpeta 'AI' -->
-                    <img src="AI/portada.jpg" alt="AI Concepts" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop'">
+                    <!-- Carpeta 'AI' (o 'concepts'), Imagen '2-ai.png' -->
+                    <img src="AI/2-ai.png" alt="AI Concepts" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop'">
                 </div>
                 <div class="project-info">
                     <div class="project-header">
