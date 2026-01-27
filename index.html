@@ -8,7 +8,7 @@
     <link rel="icon" href="IV-perro.png" type="image/png">
     
     <style>
-        /* --- ESTILOS BASE & VARIABLES --- */
+        /* --- ESTILOS BASE --- */
         :root {
             --bg-color: #ffffff;
             --text-main: #111111;
@@ -19,9 +19,7 @@
         }
 
         ::selection { background: var(--brand-color); color: #fff; }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -30,6 +28,7 @@
             color: var(--text-main);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden; /* Evitar scroll horizontal */
         }
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
@@ -39,6 +38,7 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 var(--spacing-unit);
+            position: relative;
         }
 
         /* --- HEADER --- */
@@ -49,44 +49,42 @@
             align-items: center;
         }
 
-        /* Ajuste para el Logo de Imagen */
-        .logo-img {
-            height: 50px; 
-            width: auto;
-            object-fit: contain;
-        }
-        
+        .logo-img { height: 50px; width: auto; object-fit: contain; }
         .logo-img:hover { opacity: 0.8; }
 
         .nav-links { display: flex; gap: 2.5rem; }
-
         .nav-links a {
             font-size: 0.9rem;
             color: var(--text-secondary);
             font-weight: 500;
             position: relative;
+            cursor: pointer;
         }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--brand-color);
-            transition: width 0.3s ease;
-        }
-
         .nav-links a:hover { color: var(--text-main); }
-        .nav-links a:hover::after { width: 100%; }
 
-        /* --- HERO SECTION (PERFIL) --- */
+        /* --- VISTAS (SPA Logic) --- */
+        #home-view {
+            display: block;
+            transition: opacity 0.4s ease;
+        }
+
+        #project-view {
+            display: none; /* Oculto por defecto */
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding-top: 2rem;
+        }
+
+        /* Clase para ocultar suavemente */
+        .hidden { display: none !important; opacity: 0; }
+        .visible { display: block !important; opacity: 1; }
+
+        /* --- HERO SECTION --- */
         .hero {
             padding: 9rem 0 7rem 0;
             max-width: 1000px;
             display: grid;
-            grid-template-columns: 1fr 300px; /* Texto a la izq, foto a la derecha */
+            grid-template-columns: 1fr 300px;
             gap: 4rem;
             align-items: center;
         }
@@ -100,7 +98,6 @@
         }
 
         .highlight { color: var(--brand-color); }
-
         .hero-text p {
             font-size: 1.3rem;
             color: var(--text-secondary);
@@ -108,26 +105,21 @@
             font-weight: 400;
         }
 
-        /* Estilo para tu foto de perfil (LEO) */
         .profile-img-wrapper {
-            width: 250px;
-            height: 320px;
+            width: 250px; height: 320px;
             overflow: hidden;
             border-radius: 4px;
             position: relative;
         }
-
         .profile-img-wrapper img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             filter: grayscale(100%);
             transition: filter 0.5s ease;
         }
-
         .profile-img-wrapper:hover img { filter: grayscale(0%); }
 
-        /* --- GRID DE PROYECTOS --- */
+        /* --- HOME: GRID DE PROYECTOS --- */
         .work-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
@@ -136,7 +128,7 @@
         }
 
         .project-card { cursor: pointer; display: block; }
-
+        
         .image-wrapper {
             background-color: #f4f4f4;
             aspect-ratio: 4/3;
@@ -146,8 +138,7 @@
         }
 
         .image-wrapper img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1);
         }
@@ -155,105 +146,78 @@
         .project-card:hover .image-wrapper img { transform: scale(1.03); }
 
         .project-info {
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
             padding-top: 0.5rem;
             border-top: 1px solid transparent;
             transition: border-color 0.3s ease;
         }
-
         .project-card:hover .project-info { border-top: 1px solid var(--brand-color); }
 
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            width: 100%;
-        }
-
-        .project-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 0.3rem;
-        }
-
+        .project-header { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; }
+        .project-title { font-size: 1.2rem; font-weight: 600; display: block; margin-bottom: 0.3rem; }
         .project-tags { font-size: 0.95rem; color: var(--text-secondary); }
-
-        .year {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            font-variant-numeric: tabular-nums;
-            white-space: nowrap;
+        .year { font-size: 0.95rem; color: var(--text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+        
+        .project-description-preview {
+            margin-top: 1rem; font-size: 0.95rem; color: var(--text-secondary);
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; /* Limitar texto en preview */
         }
 
-        .project-description {
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
+        /* --- DETALLE DEL PROYECTO (Nueva Vista) --- */
+        .detail-header { margin-bottom: 4rem; max-width: 900px; }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            margin-bottom: 2rem; cursor: pointer; font-weight: 500; color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+        .back-btn:hover { color: var(--brand-color); }
+
+        .detail-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+        .detail-meta { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; display: flex; gap: 2rem; }
+        .detail-description { font-size: 1.2rem; line-height: 1.6; color: var(--text-main); max-width: 800px; }
+        .detail-description p { margin-bottom: 1.5rem; }
+
+        .detail-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columnas por defecto */
+            gap: 2rem;
+            margin-bottom: 6rem;
         }
         
-        .project-description p { margin-bottom: 0.8rem; }
-        .project-description p:last-child { margin-bottom: 0; }
+        .gallery-item { width: 100%; background: #f4f4f4; }
+        .gallery-item img { width: 100%; height: auto; display: block; object-fit: cover; }
+        
+        /* Hacer que la primera foto sea full width */
+        .gallery-item:first-child { grid-column: 1 / -1; }
 
         /* --- FOOTER --- */
-        footer {
-            border-top: 1px solid #e0e0e0;
-            padding: 4rem 0;
-            margin-top: 4rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
+        footer { border-top: 1px solid #e0e0e0; padding: 4rem 0; margin-top: 4rem; display: flex; flex-direction: column; gap: 2rem; }
+        .footer-content { display: flex; justify-content: space-between; align-items: flex-end; }
         .email-link { font-size: 1.5rem; font-weight: 600; }
         .email-link:hover { color: var(--brand-color); }
-
         .socials a { margin-left: 2rem; font-size: 0.95rem; color: var(--text-secondary); }
         .socials a:hover { color: var(--brand-color); }
 
         /* --- WHATSAPP --- */
         .whatsapp-float {
-            position: fixed;
-            bottom: 40px; right: 40px;
-            background-color: var(--whatsapp-green);
-            color: #FFF;
-            width: 60px; height: 60px;
-            border-radius: 50%;
+            position: fixed; bottom: 40px; right: 40px;
+            background-color: var(--whatsapp-green); color: #FFF;
+            width: 60px; height: 60px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1000;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000;
+            transition: transform 0.3s ease;
         }
-        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .whatsapp-float:hover { transform: scale(1.1); }
         .whatsapp-icon { width: 35px; height: 35px; fill: white; }
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-                padding: 5rem 0 3rem 0;
-                gap: 2rem;
-            }
-            .profile-img-wrapper {
-                width: 100%;
-                max-width: 300px;
-                height: 350px;
-                margin: 0 auto;
-                order: -1; 
-            }
+            .hero { grid-template-columns: 1fr; padding: 5rem 0 3rem 0; gap: 2rem; }
+            .profile-img-wrapper { width: 100%; max-width: 300px; height: 350px; margin: 0 auto; order: -1; }
             .work-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+            .detail-gallery { grid-template-columns: 1fr; } /* Galeria 1 columna en móvil */
             .footer-content { flex-direction: column; align-items: flex-start; gap: 2rem; }
             .socials a { margin-left: 0; margin-right: 1.5rem; }
-            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
-            .whatsapp-icon { width: 28px; height: 28px; }
         }
     </style>
 </head>
@@ -261,173 +225,46 @@
 
     <div class="container">
         <header>
-            <a href="#">
+            <a href="#" onclick="closeProject()">
                 <img src="IV-perro.png" alt="Leonardo López Fimbres" class="logo-img">
             </a>
             
             <nav class="nav-links">
-                <a href="#proyectos">Proyectos</a>
-                <a href="#perfil">Perfil</a>
-                <a href="#contacto">Contacto</a>
+                <a onclick="closeProject(); document.getElementById('proyectos').scrollIntoView();">Proyectos</a>
+                <a onclick="closeProject(); document.getElementById('perfil').scrollIntoView();">Perfil</a>
+                <a onclick="closeProject(); document.getElementById('contacto').scrollIntoView();">Contacto</a>
             </nav>
         </header>
 
-        <section class="hero" id="perfil">
-            <div class="hero-text">
-                <h1>Diseñador Creativo & <br>
-                <span class="highlight">Estratega de Marca.</span></h1>
-                <p>Especializado en traducir tendencias de mercado en calzado funcional. Mi enfoque une la visión estética de la moda con la precisión de los negocios.</p>
+        <!-- === VISTA PRINCIPAL (HOME) === -->
+        <div id="home-view">
+            <section class="hero" id="perfil">
+                <div class="hero-text">
+                    <h1>Diseñador Creativo & <br>
+                    <span class="highlight">Estratega de Marca.</span></h1>
+                    <p>Especializado en traducir tendencias de mercado en calzado funcional. Mi enfoque une la visión estética de la moda con la precisión de los negocios.</p>
+                </div>
+                
+                <div class="profile-img-wrapper">
+                    <img src="leo.jpg" alt="Leonardo López Fimbres">
+                </div>
+            </section>
+
+            <section id="proyectos" class="work-grid">
+                <!-- El contenido se genera dinámicamente con JS para mantenerlo limpio -->
+            </section>
+        </div>
+
+        <!-- === VISTA DETALLE PROYECTO === -->
+        <div id="project-view">
+            <div class="back-btn" onclick="closeProject()">
+                ← Volver a Proyectos
             </div>
             
-            <div class="profile-img-wrapper">
-                <img src="leo.jpg" alt="Leonardo López Fimbres">
+            <div id="detail-content">
+                <!-- Se llena con JS -->
             </div>
-        </section>
-
-        <!-- SECCIÓN DE PROYECTOS -->
-        <section id="proyectos" class="work-grid">
-            
-            <!-- PROYECTO 1: ADIDAS -->
-            <article class="project-card">
-                <div class="image-wrapper">
-                    <!-- Carpeta 'Adidas', Imagen 'nata-par.png' -->
-                    <img src="Adidas/nata-par.png" alt="Adidas x Natanael Cano" onerror="this.src='https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop'">
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <div>
-                            <span class="project-title">Adidas Rivalry x Natanael Cano</span>
-                            <div class="project-tags">Footwear Design / Collab Concept</div>
-                        </div>
-                        <span class="year">2024</span>
-                    </div>
-                    <div class="project-description">
-                        <p>Así es como luciría una colaboración entre el cantante mexicano y Adidas. Un sneaker versátil: diseñado para la tabla, las calles y el escenario.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- PROYECTO 2: RAYOS -->
-            <article class="project-card">
-                <div class="image-wrapper">
-                    <!-- Carpeta 'Rayos', Imagen 'front-urban.png' -->
-                    <img src="Rayos/front-urban.png" alt="Colección Rayos de Hermosillo" onerror="this.src='https://images.unsplash.com/photo-1577471488278-161db3865c57?q=80&w=2069&auto=format&fit=crop'">
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <div>
-                            <span class="project-title">Urban City Collection: Rayos</span>
-                            <div class="project-tags">Sportswear / Contest Finalist</div>
-                        </div>
-                        <span class="year">2024</span>
-                    </div>
-                    <div class="project-description">
-                        <p>Diseño de jersey "Mezquite" para el concurso Urban City Collection, organizado por el equipo profesional Rayos de Hermosillo. Inspirado en la flora y fauna local del desierto.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- PROYECTO 3: ORGULLO -->
-            <article class="project-card">
-                <div class="image-wrapper">
-                    <!-- Carpeta 'Orgullo', Imagen '1-orgullo.webp' -->
-                    <img src="Orgullo/1-orgullo.webp" alt="El Orgullo de Casa" onerror="this.src='https://images.unsplash.com/photo-1515524738708-327f6b0033a7?q=80&w=2070&auto=format&fit=crop'">
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <div>
-                            <span class="project-title">El Orgullo de Casa</span>
-                            <div class="project-tags">Fashion Design / Cultural Narrative</div>
-                        </div>
-                        <span class="year">2024</span>
-                    </div>
-                    <div class="project-description">
-                        <p>Colección que explora cómo los atletas sirven como íconos culturales para Latinoamérica. El viaje de superestrella a leyenda es nuestra fuente de inspiración.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- PROYECTO 4: SAUCONY -->
-            <article class="project-card">
-                <div class="image-wrapper">
-                    <!-- Carpeta 'Saucony', Imagen 'wsg-h.png' (H = Horizontal, mejor para portada) -->
-                    <img src="Saucony/wsg-h.png" alt="Saucony Mac n Cheese" onerror="this.src='https://images.unsplash.com/photo-1597045566677-8cf032ed6634?q=80&w=1974&auto=format&fit=crop'">
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <div>
-                            <span class="project-title">Westside Gunn x Saucony</span>
-                            <div class="project-tags">Footwear Concept / Research</div>
-                        </div>
-                        <span class="year">2023</span>
-                    </div>
-                    <div class="project-description">
-                        <p>Concepto "Mac n' Cheese" inspirado en el rapero de Buffalo. Nos sumergimos en la historia del platillo y su conexión con la comunidad negra en EE.UU.</p>
-                    </div>
-                </div>
-            </article>
-
-             <!-- PROYECTO 5: MISFIT -->
-             <article class="project-card">
-                <div class="image-wrapper">
-                    <!-- Carpeta 'Misfit', Imagen 'edo-1.webp' -->
-                    <img src="Misfit/edo-1.webp" alt="Misfit Runway" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2073&auto=format&fit=crop'">
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <div>
-                            <span class="project-title">MISFIT: Reinventing EDO</span>
-                            <div class="project-tags">Haute Couture / Avant-Garde</div>
-                        </div>
-                        <span class="year">2023</span>
-                    </div>
-                    <div class="project-description">
-                        <p>Reinvención de siluetas japonesas históricas (Periodo EDO), narrando un fragmento del pasado a través de un lente contemporáneo y de alta costura.</p>
-                    </div>
-                </div>
-            </article>
-
-            <!-- PROYECTO 6: COUNTRY CLUB -->
-            <article class="project-card">
-                <div class="image-wrapper">
-                    <!-- Mantenemos Placeholder - No había imágenes de Country Club en tu lista -->
-                    <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070&auto=format&fit=crop" alt="Country Club Social Night">
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <div>
-                            <span class="project-title">Country Club Social Night</span>
-                            <div class="project-tags">Neo-Vintage / Fashion Collection</div>
-                        </div>
-                        <span class="year">2023</span>
-                    </div>
-                    <div class="project-description">
-                        <p>Inspirada en la leyenda del Casino del Diablo. Fusión "neo-vintage" de prendas y tradiciones de los años 50 con estilos actuales.</p>
-                    </div>
-                </div>
-            </article>
-
-             <!-- PROYECTO 7: CONCEPTS + AI -->
-             <article class="project-card">
-                <div class="image-wrapper">
-                    <!-- Carpeta 'AI' (o 'concepts'), Imagen '2-ai.png' -->
-                    <img src="AI/2-ai.png" alt="AI Concepts" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop'">
-                </div>
-                <div class="project-info">
-                    <div class="project-header">
-                        <div>
-                            <span class="project-title">Design Concepts + AI</span>
-                            <div class="project-tags">Generative AI / Vizcom / Prototyping</div>
-                        </div>
-                        <span class="year">2024</span>
-                    </div>
-                    <div class="project-description">
-                        <p>Diseños conceptuales para atletas locales, utilizando renders generados por Inteligencia Artificial (Vizcom) para prototipado rápido.</p>
-                    </div>
-                </div>
-            </article>
-
-        </section>
+        </div>
 
         <footer id="contacto">
             <div class="footer-content">
@@ -452,6 +289,172 @@
             <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-4-10.5-6.8z"/>
         </svg>
     </a>
+
+    <!-- === LÓGICA JAVASCRIPT === -->
+    <script>
+        // DATOS DE LOS PROYECTOS
+        const projects = [
+            {
+                id: 1,
+                title: "Adidas Rivalry x Natanael Cano",
+                year: "2024",
+                tags: "Footwear Design / Collab Concept",
+                description: `Así es como luciría una colaboración entre el cantante mexicano y Adidas. Un sneaker versátil: diseñado para la tabla, las calles y el escenario.`,
+                folder: "Adidas",
+                // La primera imagen es la portada
+                images: ["nata-par.png", "nata-br.png", "nata-logo.png", "nata-mdb.png"] 
+            },
+            {
+                id: 2,
+                title: "Urban City Collection: Rayos",
+                year: "2024",
+                tags: "Sportswear / Contest Finalist",
+                description: `Diseño de jersey "Mezquite" para el concurso Urban City Collection, organizado por el equipo profesional Rayos de Hermosillo. Inspirado en la flora y fauna local del desierto, particularmente en cómo este árbol nativo prospera en el calor extremo, tal como nosotros florecemos a pesar de las condiciones.`,
+                folder: "Rayos",
+                images: ["front-urban.png", "espalda-urban.png", "jsy-urban.png", "urban-mdb-1.png", "urban-mdb.png", "urban-snkrs.png"]
+            },
+            {
+                id: 3,
+                title: "El Orgullo de Casa",
+                year: "2024",
+                tags: "Fashion Design / Cultural Narrative",
+                description: `Colección que explora cómo los atletas sirven como íconos culturales para Latinoamérica. El viaje de superestrella a leyenda es nuestra fuente de inspiración, no solo en el deporte, sino como símbolos de arte y cultura.<br><br>Exploramos las diferentes etapas del viaje de un atleta para contar una historia lineal, desde el comienzo de su reconocimiento público hasta alcanzar el pedestal más alto.`,
+                folder: "Orgullo",
+                images: ["1-orgullo.webp", "3-orgullo.webp", "10-orgullo.webp", "12-orgullo.webp", "13-orgullo.webp", "17-orgullo.webp", "19-orgullo.webp", "22-orgullo.webp", "23-orgullo.webp", "24-orgullo.webp"]
+            },
+            {
+                id: 4,
+                title: "Westside Gunn x Saucony",
+                year: "2023",
+                tags: "Footwear Concept / Research",
+                description: `Concepto "Mac n' Cheese" inspirado en el rapero de Buffalo, su comida favorita y su colaboración con Saucony. Para crear esta silueta nos sumergimos en la historia del platillo y su conexión con la comunidad negra en EE.UU., traído desde Francia por James Hemings.`,
+                folder: "Saucony",
+                images: ["wsg-h.png", "wsg-v.png", "wsg-logo.png", "wsg-mdb.png"]
+            },
+            {
+                id: 5,
+                title: "MISFIT: Reinventing EDO",
+                year: "2023",
+                tags: "Haute Couture / Avant-Garde",
+                description: `El objetivo fue mostrar el período histórico EDO a través de la ropa, yuxtaponiendo siluetas antiguas y contemporáneas. La idea rectora reinventa siluetas japonesas históricas, narrando un fragmento del pasado y destacando el contraste entre la represión de esa era y la libertad de este diseño.`,
+                folder: "Misfit",
+                images: ["edo-1.webp", "edo-2.webp", "edo-3.webp", "edo-4.webp", "edo-5.webp", "edo-6.webp", "edo-7.webp", "edo-8.webp", "edo-9.webp", "edo-10.webp"]
+            },
+            {
+                id: 6,
+                title: "Country Club Social Night",
+                year: "2023",
+                tags: "Neo-Vintage / Fashion Collection",
+                description: `Inspirada en la leyenda del Casino del Diablo de Hermosillo (años 50). La colección fusiona lo mítico con lo "neo-vintage", mezclando prendas y tradiciones de aquella época con estilos contemporáneos.`,
+                folder: "CountryClub", // Usaremos placeholder por ahora
+                images: [] // Placeholder images se inyectarán si está vacío
+            },
+            {
+                id: 7,
+                title: "Design Concepts + AI",
+                year: "2024",
+                tags: "Generative AI / Vizcom / Prototyping",
+                description: `Diseños conceptuales para atletas locales: Héctor 'Toro' Corrales (MMA) y César Salazar (Beisbol). Ambos conceptos cuentan con renders generados por Inteligencia Artificial (Vizcom) para prototipado rápido.`,
+                folder: "AI", // Carpeta AI o Concepts según subiste
+                images: ["2-ai.png", "1-botas.png", "1-cleats.png", "2-rash.png", "3-shorts.png", "4-conjunto.png", "laceless-ch.png", "laceless-mdb.png"]
+            }
+        ];
+
+        // RENDERIZAR GRID INICIAL
+        const gridContainer = document.getElementById('proyectos');
+        
+        projects.forEach(p => {
+            // Imagen de portada (la primera del array)
+            // Si el array está vacío o la ruta falla, usa un placeholder de unsplash
+            const coverImage = p.images.length > 0 ? `${p.folder}/${p.images[0]}` : 'https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070&auto=format&fit=crop';
+            
+            const cardHTML = `
+                <article class="project-card" onclick="openProject(${p.id})">
+                    <div class="image-wrapper">
+                        <img src="${coverImage}" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop'">
+                    </div>
+                    <div class="project-info">
+                        <div class="project-header">
+                            <div>
+                                <span class="project-title">${p.title}</span>
+                                <div class="project-tags">${p.tags}</div>
+                            </div>
+                            <span class="year">${p.year}</span>
+                        </div>
+                        <div class="project-description-preview">
+                            <p>${p.description}</p>
+                        </div>
+                    </div>
+                </article>
+            `;
+            gridContainer.innerHTML += cardHTML;
+        });
+
+        // FUNCIONES DE NAVEGACIÓN
+        function openProject(id) {
+            const project = projects.find(p => p.id === id);
+            if (!project) return;
+
+            // Scroll al top
+            window.scrollTo(0, 0);
+
+            // Poblar detalle
+            const detailContainer = document.getElementById('detail-content');
+            
+            // Generar HTML de imágenes
+            let imagesHTML = '';
+            if (project.images.length > 0) {
+                project.images.forEach(img => {
+                    imagesHTML += `
+                        <div class="gallery-item">
+                            <img src="${project.folder}/${img}" alt="${project.title}" onerror="this.style.display='none'">
+                        </div>
+                    `;
+                });
+            } else {
+                // Placeholder para Country Club si no tiene imágenes
+                imagesHTML = `
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=2070" alt="Placeholder"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2020" alt="Placeholder"></div>
+                `;
+            }
+
+            detailContainer.innerHTML = `
+                <div class="detail-header">
+                    <div class="detail-meta">
+                        <span>${project.year}</span>
+                        <span>—</span>
+                        <span>${project.tags}</span>
+                    </div>
+                    <h1 class="detail-title">${project.title}</h1>
+                    <div class="detail-description">
+                        <p>${project.description}</p>
+                    </div>
+                </div>
+                <div class="detail-gallery">
+                    ${imagesHTML}
+                </div>
+            `;
+
+            // Cambiar vista
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('project-view').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('project-view').classList.add('visible');
+            }, 10);
+        }
+
+        function closeProject() {
+            // Scroll al grid
+            const projectView = document.getElementById('project-view');
+            
+            projectView.classList.remove('visible');
+            setTimeout(() => {
+                projectView.style.display = 'none';
+                document.getElementById('home-view').classList.remove('hidden');
+            }, 400);
+        }
+    </script>
 
 </body>
 </html>
